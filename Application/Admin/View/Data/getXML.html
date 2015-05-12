@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Company>
+<t1>
+
+    	<?php $n = 0;?>
+		<foreach name="data" item="vo" >
+
+		  <row{$n=$n+1}  col1="{$vo.company}" 	col2= "{$vo.project.name}" 
+		  col3="{$vo.reviewMark}"	 col4="{$vo.reviewStatus}" 	col5= ""   />
+		  <?php echo PHP_EOL; ?>
+
+		</foreach>
+</t1>
+</Company>

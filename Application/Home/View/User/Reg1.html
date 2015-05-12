@@ -1,0 +1,86 @@
+<extend name="Base/common"/>
+<block name="HeaderScript">
+	<script>
+		$(function(){
+			docheckTime();
+			});
+			var regi=11;
+			function docheckTime()
+			{
+				if(regi-- >0)
+				{
+					$("#btnnext").html('请阅读条款，'+regi+'秒');
+				
+					setTimeout(docheckTime,1000);
+				}else
+				{
+					$("#btnnext").html('下一步');
+					$("#btnnext").attr('disabled',false);
+				}
+			}
+	</script>
+</block>
+
+<block name="body">
+<div class="table-bordered reg" style="min-height:600px;">
+	<div class="regTitle">
+		<h3 class="regTitleContent">企业注册</h3>
+
+	</div>
+	<div class="regContent" style="min-height:400px;">
+	<p style="padding:10px;line-height:30px;font-size:18px;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎注册科技型中小企业风险补偿金项目申报系统！<br /><br />	
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>一、申请企业必须符合以下要求：</b><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、经市科委认定科技型中小企业；<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、企业所属产业符合国家及我市支持的产业政策发展方向；<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、企业具有符合资助范围的创新项目，包括新产品的产业化及扩大生产规模；具有自主知识产权的重大成果转化和产业化；新工艺应用。<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4、企业有贷款需求和资金偿还能力，资产负债率一般不高于60%；<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5、企业财务管理制度健全，纳税信用和银行信用良好；<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6、企业经营状况良好，成长速度快，具备成为科技“小巨人”企业的发展潜力；<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7、通过项目的实施具备上市条件或未来规划上市的企业。<br /><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>二、支持方式及额度</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、支持方式：银行信用贷款；<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、支持额度：一般给予100-1000万元银行信用贷款；<br/><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本系统所填报的内容将作为专家评审、项目立项的依据，请申报企业如实填写。如有欺瞒和作假行为，申报企业将承担由此带来的一切后果及相关法律责任。<br/>
+	</p>
+	</div>
+	<div class="regFoot">
+		<div class="row">
+			<div class="span4">&nbsp;</div>
+			<div class="span4 agree">
+				<label class="checkbox" style="font-size:18px;">
+                <input type="checkbox" id="optionsCheckbox" value="1" class="checkbox">
+		我已阅读并接受上述条款
+              	</label>
+			</div>
+			<div class="span4">&nbsp;</div>
+		</div>
+		<div class="row">
+			<form method="post" action="{:U('Home/User/Register')}"/>
+			<div class="span3">&nbsp;</div>
+			<div class="span2" style="border:0px solid">
+				<button id="btnnext" class="btn btn-large btn-primary input-medium" type="submit" onclick="return check();" disabled="true">下一步</button>
+			</div>
+			<div class="span3">
+				<a class="btn btn-large input-medium" href="{:U('Home/User/Login')}">取消</a>
+				<br/><br/>
+			</div>
+			</form>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+	function check()
+	{
+		if($("#optionsCheckbox").attr("checked"))
+		{
+			return true;
+		}else
+		{
+			alert("请阅读并接收上述条款")
+			return false;
+		}
+	}
+</script>
+</block>

@@ -1,0 +1,38 @@
+﻿<div class="span2 mainContentLeft">
+		
+		<ul class="nav nav-pills nav-stacked">
+			<li class="nav-header">
+			    我的账户
+			</li>
+				
+			<!--JS效果里面没有M3进来蓝色还在最新通知-->
+			<li {$m1}><a href="{:U('Home/Index/Index')}" >最新通知</a></li>
+			<li {$m3}><a href="{:U('Home/Company/Commit')}">企业承诺书</a></li>
+			<li {$m2}><a href="{:U('Home/Company/Base')}" >注册信息</a></li>			
+			<li {$m4}><a href="{:U('Home/User/Profile')}" >密码修改</a></li>
+		</ul>
+		
+		<ul class="nav nav-pills nav-stacked">
+			<li class="nav-header">
+			    项目申请{$Think.session.company_status}
+			</li>
+			<li {$m6|isDisabled}><a href="{:U('Home/Company/Info1')}" >企业基本情况</a></li>			
+			<li {$m8|isDisabled}><a href="{:U('Home/Project/Info1')}" >项目基本情况</a></li>
+			<li {$m9|isDisabled}><a href="{:U('Home/Project/Info2')}" >项目资金还款计划</a></li>
+			<li {$m10|isDisabled}><a href="{:U('Home/Company/Attach1')}" >&nbsp;&nbsp;&nbsp;&nbsp;附表1:主要产品信息</a></li>
+			<li {$m11|isDisabled}><a href="{:U('Home/Company/Attach2')}" >&nbsp;&nbsp;&nbsp;&nbsp;附表2:前五大应收款</a></li>
+			<li {$m12|isDisabled}><a href="{:U('Home/Company/Attach3')}" >&nbsp;&nbsp;&nbsp;&nbsp;附表3:前五大应付款</a></li>
+			<li {$m13|isDisabled}><a href="{:U('Home/Company/Attach4')}" >&nbsp;&nbsp;&nbsp;&nbsp;附表4:主要借款</a></li>
+			<li {$m14|isDisabled}><a href="{:U('Home/Company/Attach5')}" >&nbsp;&nbsp;&nbsp;&nbsp;附表5:长期投资</a></li>
+			<li {$m15|isDisabled}><a href="{:U('Home/Company/Attach6')}" >&nbsp;&nbsp;&nbsp;&nbsp;附表6:其它数据</a></li>
+			<li {$m16|isDisabled}><a href="{:U('Home/Company/Files')}" >&nbsp;&nbsp;&nbsp;&nbsp;相关附件</a></li>
+            <li {$m17|isDisabled}><a href="{:U('Home/Company/Apply')}" >提交申报材料</a></li>
+            <li {$m18|isDisabled}><a href="{:U('Home/Company/Info2')}" >申报材料下载打印</a></li>
+
+
+		</ul>
+
+		<script>
+			$(".nav .disabled").click(function(){return false});
+		</script>
+</div>

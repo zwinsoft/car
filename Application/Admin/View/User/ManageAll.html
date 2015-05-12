@@ -1,0 +1,173 @@
+<extend name="Base/common"/>
+
+<block name="HeaderScript">
+
+
+
+
+</script>
+
+
+</block>
+
+<block name="body">
+<div class="row mainContent">
+	<include file="Public/left"/>
+	<div class="span7">
+		<fieldset>
+				<legend>用户管理&nbsp;&nbsp;
+                    <a class="btn btn-small" data-toggle="modal"data-target="#addUser" >增加用户</a>
+                    <div class="modal fade" id="addUser" tabindex="-1" role="dialog"aria-labelledby="myModalLabel" aria-hidden="true">
+
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                    添加用户
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="?m=Admin&c=User&a=AddUser" method="post">
+
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <td>用户名</td>
+                                                <td><input type="text" name="username"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>密码</td>
+                                                <td><input type="text" name="password"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>手机</td>
+                                                <td><input type="text" name="IPone"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>电子邮箱</td>
+                                                <td><input type="text" name="Email"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>真实姓名</td>
+                                                <td><input type="text" name="realname"></td>
+                                            </tr>
+                                        </table>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <input type="submit" class="btn btn-primary" value="确认添加" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </legend>
+		<table class="table table-bordered table-striped ">
+			<tr>
+				<td>编号</td>
+                <td>用户名</td>
+				<td>电话</td>
+				<td>姓名</td>
+				<td colspan='3'>操作</td>
+			</tr>
+			
+			<?php $n=0;?>
+			<foreach name="data" item="vo" >
+			<?php $n=$n+1;?>
+			<tr>
+				
+				<td>{$vo.id}</td>
+				<td>{$vo.username}</td>
+				<td>{$vo.IPone}</td>
+				<td>{$vo.realname}</td>
+				<td>
+                    <a class="btn btn-small btn-warning" href="javascript:void(0)" onclick="ajaxResetPwd({$vo.id})">重置密码</a>
+					<a class="btn btn-small btn-warning" href="javascript:void(0)" onclick="ajaxDeleteUser({$vo.id})">删除</a>
+				</td>
+			</tr>
+			</foreach>
+		</table>
+        <div style="width:100%;text-align:right;">
+            <?php?>
+            <div class="pagination pagination-right">
+                <ul>
+                    <li>
+                        <a href="?m=Admin&c=User&a=ManageAll&page=1">
+                    <i class="icon-fast-backward"></i></a>
+                    </li>
+                    <li class="<?php echo ($page==1 || !isset($page))?"disabled":"";?>">
+                    <a href="?m=Admin&c=User&a=ManageAll&page={$page-1}">前一页</a>
+                    </li>
+                    <li class="<?php echo $page==($maxpage-1)?"disabled":"";?>">
+                    <a href="?m=Admin&c=User&a=ManageAll&page={$page+1}">下一页</a>
+                    </li>
+                    <li>
+                    <a href="?m=Admin&c=User&a=ManageAll&page={$maxpage-1}"><i class="icon-fast-forward"></i></a>
+                    </li>
+                    <li>
+                    <select class="input-small" style="line-height:34px;height:36px;" onchange="location.href='?m=Admin&c=User&a=ManageAll&page='+this.value">
+                    <for start="1" end="$maxpage" step="1" name="n">
+                    <if condition="$page eq $n ">
+                    <option value="{$n}" selected>第{$n}页</option>
+                    <else />
+                    <option value="{$n}" >第{$n}页</option>
+                    </if>
+                    </for>
+                    </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+		</fieldset>
+	</div>
+</div>
+        <script>
+            //ajax方式删除用户
+            function ajaxDeleteUser(id) {
+                r=confirm("确认删除该用户吗？");
+                if(!r) {
+                    return;
+                }
+
+                url="?m=Admin&c=User&a=ajaxDeleteUser";
+                data={id:id};
+                callback=function(res) {
+                    if(res=='success') {
+                        alert('删除成功！');
+                        window.location.reload();
+                    }
+                    else if(res=='failure') {
+                        alert('删除失败，请重试！');
+                    }
+                }
+                $.post(url,data,callback);
+            }
+
+            //ajax方式重置密码
+            function ajaxResetPwd(id) {
+                r=confirm("确认将该用户密码初始化为原始密码（123456）吗？");
+                if(!r) {
+                    return;
+                }
+
+                url="?m=Admin&c=User&a=ajaxResetPwd";
+                data={id:id};
+                callback=function(res) {
+                    if(res=='success') {
+                        alert('密码已经初始化为123456！');
+                        window.location.reload();
+                    }
+                    else if(res=='failure') {
+                        alert('密码初始化失败，请重试！');
+                    }
+                }
+                $.post(url,data,callback);
+            }
+                        
+            
+        </script>
+</block>

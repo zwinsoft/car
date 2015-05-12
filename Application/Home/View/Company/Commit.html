@@ -1,0 +1,136 @@
+<extend name="Base/common"/>
+
+<block name="HeaderScript">
+	<script>
+		
+		function checkfile(id,obj)
+		{
+			var filename = $("#fileInput"+id).val();
+			if(filename=="")
+			{
+				alert("请先选择文件");
+				return false;
+			}else
+			{
+				var ext=filename.substring(filename.lastIndexOf(".")+1).toLowerCase();
+				
+				if(!(ext=='jpg' || ext=='png' || ext=='gif' ||ext=='jpeg' ||ext=='rar' ||ext=='zip'))
+				{
+					alert("请上传图片文件或图片文件的压缩包。")
+					return false;
+				}
+				var maxsize = 10*1024*1024;//10M  
+				var errMsg = "上传的附件文件不能超过10M！！！";
+				var files=document.getElementById("fileInput"+id).files;
+				
+				if(files[0].size>maxsize)
+				{
+					alert(errMsg);
+					return false;
+				}
+			}
+			obj.value="上传中......"
+			obj.id="upbtn"+id;
+			setTimeout("checkuploadFinish("+id+")",1000);
+			return true;
+		}
+		var i=1;
+		function checkuploadFinish(id)
+		{
+				s="";
+				i=i+1;
+				if(i>3)
+				{
+				i=1;	
+				}
+				for(var j=1;j<=i;j++)
+				{
+				 	s=s+"......";
+			  }
+					//console.log($("#frm"+id)[0].contentWindow.document.innerHTML)
+					//console.log($("#fileInput"+id).val());
+					var frmsrc=$("#frm"+id)[0].contentWindow.location.href.toString();
+					if(frmsrc.indexOf("sucess")>-1)
+					{
+						 $("#frm"+id)[0].contentWindow.location.href=frmsrc.replace("sucess","");
+						 $("#upbtn"+id).val("上传");
+						
+					}else
+					{
+						 $("#upbtn"+id).val("上传中"+s);
+							setTimeout("checkuploadFinish("+id+")",1000);
+					}
+				 
+			
+		}
+	</script>
+	<style>
+	.frmFile{
+		height:40px;
+	}
+	.form-horizontal .controls{
+		margin-left:220px;
+	}
+	.form-horizontal .control-label{
+		width:210px;
+	}
+	</style>
+</block>
+
+<block name="body">
+<img id="tempimg" dynsrc="" src="" style="display:none" />  
+<div class="row mainContent">
+	<include file="Public/left"/>
+	<div class="span7">
+		<div class="regContent">
+			
+			<div class="form-horizontal">
+				<fieldset>
+					<legend><br>1、下载企业承诺书</legend>
+		      <h2><a href="__STATIC__/document/企业承诺书.doc">点此下载企业承诺书，填写后上传扫描件。</a></h2>
+		    </fieldset>
+			<fieldset>
+			<legend><br/>2、上传企业承诺书</legend>
+				<div class="control-group">
+		            <label class="control-label" for="input01">企业承诺书<br/><font color="blue">*上传企业承诺书扫描件(小于1M)</font></label>
+		            <div class="controls">
+		            <if condition="$data.status elt 1">
+		            <form action="{:U('Company/upload')}" method="post" target="frm1" enctype="multipart/form-data">
+								    <input class="input-file" name="file1" id="fileInput1" type="file">
+								    
+								    <input type="submit" value="上传" onclick="return checkfile(1,this)" class="btn"/>
+								  	
+								</form>
+								</if>
+		            <iframe src="{:U('Company/Filedetail',array('type'=>1))}" name="frm1" id="frm1" class="frmFile" style="width:100%;;boder:0px solid #ffffff;"></iframe>
+		            </div>
+		        </div>
+		       
+
+		        </fieldset>
+		     
+		        <div class="control-group">
+		            <form method="post" action="__SELF__">
+		            <div class="controls">
+		            	<if condition="$data.status elt 1">
+		            		<a name="submit"></a>
+								    <button type="submit" onclick="return check()" class="btn btn-large btn-primary">提交承诺书进行下一步</button>
+		            	</if>
+		            </div>
+		          	</form>
+		          	<script>
+		          		function check(){
+	          				if(confirm(' 请提交承诺书，以便进行后续项目申报\n 确认提交，取消继续修改'))
+	          				{
+	          					return true;	
+	          				}
+	          				return false;
+	          			}
+	          		</script>
+		        </div>
+	        </div>
+		</div>
+	</div>
+</div>
+
+</block>

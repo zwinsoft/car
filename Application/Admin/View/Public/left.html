@@ -1,0 +1,27 @@
+<div class="span2 mainContentLeft">
+		
+		<ul class="nav nav-pills nav-stacked">
+			<li class="nav-header">
+			    后台管理
+			</li>
+
+						
+			<if condition="$Think.session.user_level eq 9">
+			<li {$waterLise}><a href="?m=Admin&c=Index&a=Index" >定损列表管理</a></li>
+            
+            
+            <li class="nav-header">用户管理</li>
+            <li {$Manageall}><a href="?m=Admin&c=User&a=ManageAll" >用户管理</a></li>
+			<li class="nav-header">通知公告</li>
+			<li {$m7}><a href="{:U('Admin/Notic/Manage')}" >公告管理</a></li>
+			<li {$m6}><a href="{:U('Admin/Notic/Add')}" >新增公告</a></li>
+			<li {$m12}><a href="{:U('Admin/SMS/Index')}" >短信管理</a></li>
+			<li {$m13}><a href="{:U('Admin/SMS/Send')}" >发送短信</a></li>
+			
+			</if>
+
+		
+			<li {$m8}><a href="{:U('Admin/User/Profile')}" >修改密码</a></li>
+			<li {$m11}><a href="{:U('Home/User/Logout')}" >退出系统</a></li>
+		</ul>
+</div>

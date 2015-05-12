@@ -1,0 +1,28 @@
+<extend name="Base/common"/>
+
+<block name="HeaderScript">
+
+	    
+</block>
+
+<block name="body">
+<div class="row mainContent">
+	<include file="Public/left"/>
+	<div class="span7">
+		<div id="home" class="tab-pane fade active in">
+			<fieldset>
+				
+				<legend><br>下载审核后的申报材料（PDF）</legend>
+                
+                <if condition="($data.status eq 7) and ($data.pdfFile neq null) ">
+                    
+                    <h2> <a target="_blank" href="<?php  echo($data['pdfFile']);?>">请点击下载审核后的申报材料并打印装订后交受理部门。</a> <br><br><br><br><br</h2>
+                <else/>
+                    <h2> 申报材料还在审核中，请稍后再来下载。</a> <br><br><br><br><br</h2>
+                </if>
+        
+        	</fieldset>
+		</div>
+	</div>
+</div>
+</block>

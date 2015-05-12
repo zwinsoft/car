@@ -1,0 +1,365 @@
+<extend name="Base/common"/>
+
+<block name="HeaderScript">
+	<script type="text/javascript" src="__STATIC__/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="__STATIC__/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="__STATIC__/js/jsAddress.js" charset="UTF-8"></script>
+
+</block>
+
+
+<block name="body">
+
+<div class="row mainContent">
+    <include file="Public/left"/>
+
+    <div style="float:left; width:80%">
+        <form action="?m=Admin&c=Index&a=update" method="post" id="form_water">
+        <table class="table-">
+            <tr>
+                <td width="480px;">
+
+                    <table class="table">
+                        <input  value="{$list.id}" readonly name="id" hidden="hidden" style="display:none">
+                        <tr>
+                            <td width="20%">水源地址</td>
+                            <td>{$list.title}</td>
+                        </tr>
+
+                        <!---->
+                        <if condition="($list.type eq 1) OR ($list.type eq 2) OR ($list.type eq 3) ">
+                        <tr>
+                            <td>水源类型</td>
+                            
+                            <td>
+                                <if condition="($list.type eq 1)">
+                                    地上式
+                                <elseif condition="$list.type eq 2"/>
+                                    地下式
+                                <elseif condition="$list.type eq 3"/>
+                                    消防水鹤
+                                <else />
+                                </if>
+                            </td>
+                        </tr>
+
+                        <if condition="($list.type eq 1)">
+                        <td width="20%">水源编号</td>
+                        <td>
+                            <input type="text" name="hydrantId" class="input-medium" value="{$list.hydrantId}">
+                        </td>
+                        </if>
+
+                        <tr>
+                            <td>所属单位</td>
+                            <td>
+                                <select class="input-small" name="belong" onchange="showUnit();" id='unitSelect'>
+                                    <option value="0">市政</option>
+                                    <option value="1">单位</option>
+                                    <input type="text" name="unit" id='unit' style='display:none;' value="{$list.unit}">
+                                </select>
+                            </td>
+                        </tr>
+                        
+                        <if condition="($list.type neq 3)">
+                        <tr>
+                            <td>管径(mm)</td>
+                            <td>
+                                <input type="radio" name="calibre" class="radio" value="0" id="calibre1">65mm/100mm
+
+                                <input type="radio" name="calibre" class="radio" value="1" id="calibre2">其他
+                            </td>
+                        </tr>
+                        </if>
+                        
+                        <tr>
+                            <td>水压</td>
+                            <td>
+                            <select id="pressure" class="input-small" name="pressure" >
+                                <option value="1">正常</option>
+                                <option value="2">不足</option>
+                            </select>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>水源情况</td>
+                            <td>
+                                <select id="status" class="input-small" name="status" >
+                                    <option value="1">全天有水</option>
+                                    <option value="2">非全天有水</option>
+                                    <option value="3">损坏</option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                        <if condition="($list.type eq 3)">
+                        <tr>
+                            <td>高度</td>
+                            <td>
+                                <input type="text" name="height" class="input-medium" value="{$list.height}">
+                            </td>
+                        </tr>
+                        </if>
+                        
+                        <elseif condition="$list.type eq 4"/>
+                        <tr>
+                            <td>水源类型</td>
+                            <td>消防水池</td>
+                        </tr>
+                        <tr>
+                            <td>蓄水量</td>
+                            <td>
+                                <input type="text" name="capacity" class="input-medium" value="{$list.capacity}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>所属单位</td>
+                            <td>
+                                <select class="input-small" name="belong" onchange="showUnit();" id='unitSelect'>
+                                    <option value="0">市政</option>
+                                    <option value="1">单位</option>
+                                    <input type="text" name="unit" id='unit' style='display:none;'>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <elseif condition="$list.type eq 5"/>
+                        <tr>
+                            <td>水源类型</td>
+                            <td>天然水源</td>
+                        </tr>
+
+                        <tr>
+                            <td>取水距离</td>
+                            <td>
+                                <input type="text" name="height" class="input-medium" value="{$list.height}">
+                            </td>
+                        </tr>
+                        <else />
+                        </if>
+
+                        <if condition="($list.type neq 5)">
+                        <tr>
+                            <td>联系人</td>
+                            <td>
+                                <input type="text" name="contacts" class="input-medium" id="contacts" placeholder="请输入联系人信息">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>联系电话</td>
+                            <td>
+                                <input type="tel" name="phone" class="input-medium" id="phone" placeholder="请输入联系电话" value="{$list.phone}">
+                            </td>
+                        </tr>
+                        </if>
+                        <tr>
+                            <td>采集员</td>
+                            <td>
+                                <input type="text" class="input-small" readonly value="{$realname}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>采集员联系方式</td>
+                            <td>
+                                <input type="text" class="input-small" readonly value="{$phone}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>更新日期</td>
+                            <td>
+                                <input type="text" name="date" class="input-small" id="date" placeholder="请输入更新日期" readonly nullmsg="请填写更新日期" >
+                            </td>
+                        </tr>
+                        <if condition="($list.confirm eq -1)">
+                        <tr>
+                            <td>驳回理由</td>
+                            <td>
+                                <textarea disabled='disabled'>{$list.reason}</textarea>
+                            </td>
+                        </tr>
+                        </if>
+                    </table>
+                </td>
+                
+                
+                <script>
+
+
+                    function showUnit() {
+                        unitSelect=document.getElementById('unitSelect');
+                        selectValue=unitSelect.value;
+                        if(selectValue==1) {
+                            document.getElementById('unit').style.display='block';
+                        }
+                        else {
+                            document.getElementById('unit').style.display='none';
+                        }
+                    }
+                </script>
+                
+                
+                <td width="480px;" height="368px">
+                    <!--引用百度地图API-->
+                    <style type="text/css">
+                    .iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
+                    .iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
+                    </style>
+                    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A4749739227af1618f7b0d1b588c0e85"></script>
+                    <!--百度地图容器-->
+                    <div style=" width:480px; height:480px;" id="dituContent"></div>
+                </td>
+            </tr>
+<!--
+            <tr>
+
+                <volist name='pic_vo' id='vo'>
+                <td height="300px;">
+
+                    <center><input type="button" class="btn" value="选择图片" onClick="$('#pic').click();"></center>
+
+                    <iframe name="pic" style="display:none;"></iframe>
+                    <input type="hidden" id="pic_url1" value="" name="pic[1]">
+                    <img width="300px;" src="{$vo.url}" id="pic_preview">
+                
+                </td>
+                </volist>
+
+                
+            </tr>
+-->
+            <tr>
+                <td colspan="2">
+                    <if condition="($list.photo neq null)"> 
+                        <img src="/xiaofang/ftpuser/{$list.photo}" width="300px;">
+                    </if>
+                </td>
+            </tr>
+            <input name="result" value="" id="result" style="display:none;">
+            <tr>
+                <td>
+                    <center>
+                        <if condition="($list.confirm eq -1)">
+                        <a onclick="pass()" class="btn btn-primary btn-block btn-large btn-success" >重新通过</a>
+                        <else />
+                        <a onclick="pass()" class="btn btn-primary btn-block btn-large btn-success" >通过</a>
+                        </if>
+                    </center>
+                </td>
+                <td>
+                    <a href="#failPass" data-toggle="modal" class="btn btn-primary btn-block btn-large btn-warning" >驳回</a>
+                    <div id="failPass" class="modal hide fade" style="display:none;">
+						<div class="modal-header">
+                            <a class="close" data-dismiss="modal">×</a>
+                            <h3>请填写未通过的原因</h3>
+					    </div>
+					    <div class="modal-body">
+                            <textarea name="reason"></textarea>
+						</div>
+						<div class="modal-footer">
+                            <a onclick="failPass()" class="btn" data-dismiss="modal">提交</a>
+                            <a href="#" class="btn" data-dismiss="modal">关闭</a>
+                        </div>
+                    </div>
+                    
+                </td>
+            </tr>
+        </table>
+        </form>
+    </div>
+</div>
+    
+<script>
+    //确定是通过还是驳回
+    function pass() {
+        $('#result').val('pass');//将result的值改为pass，意为通过
+        $('#form_water').submit();
+    }
+    function failPass() {
+        $('#result').val('failPass');//将result的值改为pass，意为通过
+        $('#form_water').submit();
+    }    
+</script>
+
+<form action="?m=Admin&c=Index&a=upload_pic&water_id={$water_id}" enctype="multipart/form-data" method="post" id="form_upload_pic" style="display:none;" target="pic">
+    <input type="file" name="pic" value="选择图片" id="pic">
+</form>
+<script>
+//文件选好之后，直接上传，并且保证值不为空
+$("#pic").change(function() {    
+	//只有选中文件，才允许上传
+    if($("#pic").val() != "") {
+        $("#form_upload_pic").submit();	
+    }
+})
+//上传成功后回调图片
+function showPic(status,img){
+    alert(status);
+
+	//显示图片
+	if(img){
+		//载入图片与预览图
+		$("#pic_preview").attr("src","Uploads/"+img);
+        $('#pic_url1').val("Uploads/"+img);
+	}
+}
+</script>
+
+
+    <script>
+        //赋值
+        $('#title').html("{$list.name}");
+        $('#type').val("{$list.type}");
+        $('#status').val("{$list.status}");
+        $('#pressure').val("{$list.pressure}");
+        $('#contacts').val("{$list.contacts}");
+        $('#phone').val("{$list.phone}");
+        $('#date').val("{$list.date}");
+        $('#type').val("{$list.type}");
+        if("{$list.belong}"==1) {
+            $('#unitSelect').val(1);
+            document.getElementById('unit').style.display='block';
+        }
+
+        if("{$list.calibre}"==1) {
+            $('#calibre2').attr("checked","checked");
+        }
+        else {
+            $('#calibre1').attr("checked","checked");
+        }
+
+    </script>
+    <script type="text/javascript">
+        var map = new BMap.Map("dituContent");
+
+
+        var point = new BMap.Point({$lng},{$lat});
+
+        var waterIcon="{$waterIcon}";
+        var myIcon = new BMap.Icon(waterIcon, new BMap.Size(21,25));
+
+
+
+        var marker = new BMap.Marker(point,{icon:myIcon});  // 创建标注
+        map.addOverlay(marker);              // 将标注添加到地图中
+        map.centerAndZoom(point, 15);
+        var opts = {
+            width : 200,     // 信息窗口宽度
+            height: 200,     // 信息窗口高度
+            title : "{$title}" , // 信息窗口标题
+        }
+        var waterContent='{$waterContent}';
+        var infoWindow = new BMap.InfoWindow(waterContent, opts);  // 创建信息窗口对象
+        marker.addEventListener("click", function(){
+            map.openInfoWindow(infoWindow,point); //开启信息窗口
+        });
+
+        //添加比例尺等控件
+        var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+        var top_left_navigation = new BMap.NavigationControl();
+        map.addControl(top_left_control);
+        map.addControl(top_left_navigation);
+        map.enableScrollWheelZoom(true)
+    </script>
+</block>
+

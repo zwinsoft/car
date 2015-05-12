@@ -1,0 +1,35 @@
+<script type="text/javascript" src="__STATIC__/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
+
+
+<input type="button" value="开始测试" onclick="ajax_temp();">
+
+<script>
+    
+    function ajax_temp() {
+        url = 'http://www.zwin.mobi/xiaofang/index.php?m=Home&c=Json&a=getJson';
+
+        data = {
+            data:{
+                'cui':123
+                
+            }
+        };
+             
+            
+
+        callback = function (json) {
+            console.log(json);
+            alert(json)
+            res = eval(json);
+ 
+        }
+        
+        $.post(url,data,callback);
+        
+        
+    
+    }
+    
+    
+    
+</script>

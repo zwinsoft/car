@@ -1,0 +1,265 @@
+<extend name="Base/common"/>
+
+<block name="HeaderScript">
+    <script type="text/javascript" src="__STATIC__/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="__STATIC__/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="__STATIC__/js/jsAddress.js" charset="UTF-8"></script>
+    <script>
+        $(function(){
+            $('.form_date').datetimepicker({
+                language:  'zh-CN',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 2,
+                forceParse: 0
+            });
+            addressInit('cmbProvince', 'cmbCity', 'cmbArea', '天津', '天津市', '南开区');
+        });
+    </script>
+</block>
+
+<block name="body">
+
+
+<div class="row mainContent">
+    <include file="Public/left"/>
+    
+    <div class="span7">
+        <!--start-->
+        <fieldset>
+        <legend>我的任务</legend>
+        <form class="well  form-inline" method="get" action="?"/>
+            <input type="hidden" name="m" value="Admin">
+            <input type="hidden" name="c" value="Index">
+            <input type="hidden" name="a" value="Index">
+
+        <div class="control-group">
+            <div class="controls">
+<!--
+                水源地址: <input type="text" class="input-large" placeholder="水源名称" id="title" name='title' value="{$Think.get.title}">
+                <notempty name="Think.get.type">
+                    <script>
+                        $("#title").val('{$Think.get.title}');
+                    </script>
+                </notempty>
+-->
+                <select name='type' id="type" style="width:15%">
+                    <option value="">－请选择水源类型－</option>
+                    <option value="1">地上式</option>
+                    <option value="2">地下式</option>
+                    <option value="3">地上水鹤</option>
+                    <option value="4">消防水池</option>
+                    <option value="5">天然水源</option>
+                </select>
+                <notempty name="Think.get.type">
+                    <script>
+                        $("#type").val('{$Think.get.type}');
+                    </script>
+                </notempty>
+
+            	<select name='status' id="status" style="width:15%">
+            		<option value="">－请选择水源情况－</option>
+                    <option value="1">全天有水</option>
+                    <option value="2">非全天有水</option>
+                    <option value="3">损坏</option>
+            	</select>
+                <notempty name="Think.get.status">
+                    <script>
+                        $("#status").val('{$Think.get.status}');
+                    </script>
+                </notempty>
+                
+                <select name='pressure' id="pressure" style="width:15%">
+            		<option value="">－请选择水压情况－</option>
+                    <option value="1">正常</option>
+                    <option value="2">不足</option>
+            	</select>
+                <notempty name="Think.get.pressure">
+                <script>
+                    $("#pressure").val('{$Think.get.pressure}');
+                </script>
+                </notempty>
+
+                采集员: <input type="text" class="input-large" placeholder="采集员" id="collector" name='collector' value="{$Think.get.collector}">
+                <notempty name="Think.get.collector">
+                    <script>
+                        $("#collector").val('{$Think.get.collector}');
+                    </script>
+                </notempty>
+
+                <select name='confirm' id="confirm" style="width:15%">
+                    <option value="">－请选择审核状态－</option>
+                    <option value="2">待审核</option>
+                    <option value="1">已通过</option>
+                    <option value="-1">已驳回</option>
+                </select>
+                <notempty name="Think.get.confirm">
+                    <script>
+                        $("#confirm").val('{$Think.get.confirm}');
+                    </script>
+                </notempty>
+
+                <br>
+                <div class="controls input-append date form_date createTime" data-date="" data-date-format="yyyy-mm-dd" data-link-field="createTime" data-link-format="yyyy-mm-dd">
+                    起始时间：
+                    <input size="16" type="text" value="" readonly id="beginDate" name="beginDate" placeholder="单击选择时间">
+                    <span class="add-on"><i class="icon-remove"></i></span>
+                    <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+                <notempty name="Think.get.beginDate">
+                    <script>
+                        $("#beginDate").val('{$Think.get.beginDate}');
+                    </script>
+                </notempty>
+                <div class="controls input-append date form_date createTime" data-date="" data-date-format="yyyy-mm-dd" data-link-field="createTime" data-link-format="yyyy-mm-dd">
+                    结束时间：
+                    <input size="16" type="text" value="" readonly id="endDate" name="endDate" placeholder="单击选择时间">
+                    <span class="add-on"><i class="icon-remove"></i></span>
+                    <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+                <notempty name="Think.get.endDate">
+                    <script>
+                        $("#endDate").val('{$Think.get.endDate}');
+                    </script>
+                </notempty>
+
+            	<button  class="btn btn-primary btn-block"><i class="icon-search"></i> 查 找 </button>
+            </div>
+        </div>
+		</form>
+
+            <table class="table table-bordered table-striped ">
+                <tr>
+                    <td>序号</td>
+                    <td>水源位置</td>
+                    <td>水源类型</td>
+                    <td>水源状态</td>
+                    <td>水压</td>
+                    <td>采集员</td>
+                    <td>检查日期</td>
+                    <td>审核状态</td>
+                    <td colspan="2">操作</td>
+                </tr>
+
+            <volist name='data' id='vo' key="k">
+            <tr id='tr_{$vo.id}'>
+                <td>{$k}</td>
+                <td>{$vo.title}</td>
+                <td>
+                    <if condition="($vo.type eq 1)">
+                        地上式
+                    <elseif condition="($vo.type eq 2)"/>
+                        地下式
+                    <elseif condition="($vo.type eq 3)"/>
+                        消防水鹤
+                    <elseif condition="($vo.type eq 4)"/>
+                        消防水池
+                    <elseif condition="($vo.type eq 5)"/>
+                        天然水源
+                    <else />类型暂无
+                    </if>
+                </td>
+                <td>
+                    <if condition="($vo.status eq 1)">
+                        <font color="red">全天有水</font>
+                    <elseif condition="($vo.status eq 2)"/>
+                        <font color="#D6BE05">非全天有水</font>
+                    <elseif condition="($vo.status eq 3)"/>
+                        <font color="grey">损坏</font>
+                    <else />
+                    </if>
+                </td>
+                <td>
+                    <if condition="($vo.pressure eq 1)">
+                    <font color="red">水压正常</font>
+                    <elseif condition="($vo.pressure eq 2)"/>
+                    <font color="#D6BE05">水压不足</font>
+                    <else />
+                    </if>
+                </td>
+                <td>{$vo.userRealname}</td>
+                <td>{$vo.date}</td>
+                <td>
+                    <if condition="$vo.confirm eq 0">
+                        <font color='red'>待审核</font>
+                    <elseif condition="$vo.confirm eq -1"/>
+                        <font color='grey'>未通过</font>
+                    <elseif condition="$vo.confirm eq 1"/>
+                        <font color='green'>已通过</font>
+                    </if>
+                </td>
+                <td><a href='?m=Admin&c=Index&a=detail&id={$vo.id}'>查看</a></td>
+                <td><a href="javascript:void(0);" onclick="ajax_delete({$vo.id})">删除</a></td>
+			</tr>
+            </volist>
+
+            <tr>
+                <td>汇总统计</td>
+                <td colspan="9">
+                    已通过水源<a href="?m=Admin&c=Index&a=Index&confirm=1">{$waterConfirmed}</a>个，
+                    待审核<a href="?m=Admin&c=Index&a=Index&confirm=2">{$waterWaiting}</a>个，
+                    未通过<a href="?m=Admin&c=Index&a=Index&confirm=-1">{$waterRefused}</a>个，
+                    合计<a href="?m=Admin&c=Index&a=Index">{$waters}</a>个
+                    &nbsp;&nbsp;符合本次筛选条件的水源有{$all}个
+                </td>
+            </tr>
+
+		</table>
+        
+        <div style="width:100%;text-align:right;">
+        <?php?>
+		<div class="pagination pagination-right">
+            <ul>
+                <li>
+                    <a href="?m=Admin&c=Index&a=Index&title={$Think.get.title}&type={$Think.get.type}&status={$Think.get.status}&pressure={$Think.get.pressure}&page=1">
+                    <i class="icon-fast-backward"></i></a>
+                </li>
+                <li class="<?php echo ($page==1 || !isset($page))?"disabled":"";?>">
+                    <a href="?m=Admin&c=Index&a=Index&title={$Think.get.title}&type={$Think.get.type}&status={$Think.get.status}&pressure={$Think.get.pressure}&page={$page-1}">前一页</a>
+                </li>
+                <li class="<?php echo $page==($maxpage-1)?"disabled":"";?>">
+                    <a href="?m=Admin&c=Index&a=Index&title={$Think.get.title}&type={$Think.get.type}&status={$Think.get.status}&pressure={$Think.get.pressure}&page={$page+1}">下一页</a>
+                </li>
+                <li>
+                    <a href="?m=Admin&c=Index&a=Index&title={$Think.get.title}&type={$Think.get.type}&status={$Think.get.status}&pressure={$Think.get.pressure}&page={$maxpage-1}"><i class="icon-fast-forward"></i></a>
+                </li>
+                <li>
+                    <select class="input-small" style="line-height:34px;height:36px;" onchange="location.href='__SELF__&st={$Think.get.st}&et={$Think.get.et}&comp={$Think.get.comp}&status={$Think.get.status}&page='+this.value">
+					<for start="1" end="$maxpage" step="1" name="n">
+						<if condition="$page eq $n ">
+							<option value="{$n}" selected>第{$n}页</option>
+						<else />
+						  <option value="{$n}" >第{$n}页</option>
+						</if>
+					</for>
+					</select>
+				</li>
+            </ul>
+        </div>
+			
+		</div>
+		<!--end-->
+	</div>
+</div>
+<script>
+    //ajax删除水源信息
+    function ajax_delete(id) {
+        if(confirm('您确定要删除该水源信息吗？')) {
+            URL = '?m=Admin&c=Index&a=ajax_delete&id='+id;
+            callback = function (json) {
+                obj = eval(json);
+                alert(obj.str);
+                window.location.reload();
+            }
+            $.get(URL,callback);
+        }        
+    }
+
+</script>
+</block>
+<div style=''>
+
+</div>

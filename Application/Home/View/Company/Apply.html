@@ -1,0 +1,279 @@
+<extend name="Base/common"/>
+
+<block name="HeaderScript">
+	
+
+</block>
+
+<block name="body">
+<img id="tempimg" dynsrc="" src="" style="display:none" />  
+<div class="row mainContent">
+	<include file="Public/left"/>
+	<div class="span7">
+		<div class="regContent">
+			
+			<div class="form-horizontal">
+				<fieldset>
+					<legend><br> 确认提交项目申请材料</legend>
+
+			<table class="table table-bordered table-condensed">
+
+			<tr><th style="text-align:left" >申报材料提交明细</th><th style="text-align:left" >是否提交</th></tr>
+					<tr>
+						<td> 1、企业基本情况   </td>
+						<td> <if condition="$data.flag1 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if> 
+						
+										
+						</td>
+					
+					</tr>
+					<tr>
+						<td> 2、项目基本情况 </td>
+						<td><if condition="$data.flag2 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if> 
+						</td>
+					</tr>
+					<tr>
+						<td> 3、项目资金还款计划 </td>
+						<td>
+						<if condition="$data.flag3 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if> 
+
+						</td>
+					</tr>
+					<tr>
+						<td> 4、附表1 ：主要产品信息</td>
+						<td>
+						<if condition="$data.flag4 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if> 
+
+						</td>
+					</tr>
+					<tr>
+						<td> 5、附表2：前五大应收款 </td>
+						<td>
+						<if condition="$data.flag5 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if> 
+
+						</td>
+					</tr>
+					<tr>
+						<td> 6、附表3：前五大应付款 </td>
+						<td>
+						<if condition="$data.flag6 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if> 
+
+						</td>
+					</tr>
+					<tr>
+						<td> 7、附表4、主要借款 </td>
+						<td>
+						<if condition="$data.flag7 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if> 
+
+						</td>
+					</tr>
+					<tr>
+						<td> 8、附表5、长期投资 </td>
+						<td>
+						<if condition="$data.flag8 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if> 
+
+						</td>
+					</tr>
+					<tr>
+						<td> 9、附表6、其他数据 </td>
+						<td>
+						<if condition="$data.flag9 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if> 
+						
+						</td>
+					</tr>
+					
+			</table>
+
+		    </fieldset>
+			
+
+
+			<fieldset>
+			<legend><br>确认相关附件明细</legend>
+
+			<table class="table table-bordered table-condensed">
+
+			<tr>
+			<th style="text-align:left" >确认必填相关附件明细</th><th style="text-align:left" >是否提交</th></tr>
+					<tr>
+						<td> 1、营业执照   </td>
+						<td> <if condition="$data.attach2 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+						</td>
+					
+					</tr>
+					<tr>
+						<td> 2、组织结构代码证 </td>
+						<td> <if condition="$data.attach3 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+						</td>
+					</tr>
+                    <tr>
+						<td> 3、国税登记证 </td>
+							<td> <if condition="$data.attach4 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+							</td>
+					</tr>
+					<tr>
+						<td> 4、地税登记证 </td>
+						<td>  <if condition="$data.attach5 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+					</tr>
+					<tr>
+						<td> 5、天津市科技型中小企业认定证书 </td>
+						<td> <if condition="$data.attach6 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+						</td>
+					</tr>
+					<tr>
+						<td> 6、企业章程 </td>
+						<td> <if condition="$data.attach7 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+						</td>
+					</tr>
+					<tr>
+						<td> 7、公司成立验资报告 </td>
+						<td> <if condition="$data.attach8 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+							 </td>
+					</tr>
+					<tr>
+						<td> 8、最近一个月的资产负债表 </td>
+						<td> <if condition="$data.attach10 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+						</td>
+					</tr>
+					<tr>
+						<td> 9、损益表 </td>
+						<td> <if condition="$data.attach11 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+							 </td>
+					</tr>
+					<tr>
+						<td> 10、前三年的审计报告 </td>
+						<td> <if condition="$data.attach9 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+							 </td>
+					</tr>
+					<tr>
+			<th style="text-align:left" >确认选填相关附件明细</th><th style="text-align:left" >是否提交</th></tr>
+			<tr>
+						<td> 1、专利证书 </td>
+						<td> <if condition="$data.attach12 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+							 </td>
+					</tr>
+					<tr>
+						<td> 2、高新技术证书 </td>
+						<td> <if condition="$data.attach13 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+							 </td>
+					</tr>
+					<tr>
+						<td> 3、银行信用等级证明 </td>
+						<td> <if condition="$data.attach14 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+							 </td>
+					</tr>
+					<tr>
+						<td> 4、相关附件1 </td>
+						<td> <if condition="$data.attach15 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+							 </td>
+					</tr>
+					<tr>
+						<td> 5、相关附件2 </td>
+						<td> <if condition="$data.attach16 eq 1 "><span style="color:green;">已提交</span>
+						     <else/>
+							 <span style="color:red;">未提交</span> 
+							 </if>
+							 </td>
+					</tr>
+			</table>
+			
+
+		    </fieldset>
+
+
+
+		     
+		        <div class="control-group">
+		            <form method="post" action="__SELF__">
+		            <div class="controls">
+		            	<if condition="($data.status eq 4) OR ($data.status eq 5) ">
+		            		<a name="submit"></a>
+								    <button type="submit" onclick="return check()" class="btn btn-large btn-primary">提交项目申请材料</button>
+		            	</if>
+		            </div>
+		          	</form>
+		          	<script>
+		          		function check(){
+	          				if(confirm('确认提交项目申请材料？提交后项目资料不可再修改\n确认提交，取消继续修改'))
+	          				{
+	          					return true;	
+	          				}
+	          				return false;
+	          			}
+	          		</script>
+		        </div>
+	        </div>
+		</div>
+	</div>
+</div>
+
+</block>

@@ -1,0 +1,168 @@
+<extend name="Base/common"/>
+
+<block name="HeaderScript">
+    <script>
+
+
+		function check()
+		{
+			var isgo=true;
+			$("input[type=text]").each(function(){
+				if($(this).val()=="" && isgo && $(this).attr("data-name") !=undefined)
+				{
+					alert($(this).attr("data-name")+" 不能为空");
+					$(this).focus();
+					isgo=false;
+					return;
+				}
+			});
+			if(!isgo)
+			{return false;}
+			
+			return isgo;
+}
+	</script>
+</block>
+
+<block name="body">
+<div class="row mainContent">
+	<include file="Public/left"/>
+	<div class="span7">
+		<div id="home" class="tab-pane fade active in">
+			<fieldset>
+				<form method="post" action="__SELF__" onsubmit="return check()" id="frmall"> 
+				<input type="hidden" name="id" value="{$Think.session.user_id}" readonly />
+				<legend>附表3、前五大户应付款项明细(单位：万元)</legend>
+				<table class="table table-bordered table-condensed">
+					<tr>
+						<td >年度</td>
+						<td >单位名称</td>
+						<td >款项性质</td>						
+						<td >金额（万元）</td>						
+					</tr>
+
+					<tr>
+						<td rowspan="5">2013</td>
+						
+						<td><input type="text" class="input-large" data-name="单位名称" name="danweimingchengF31" value="{$vo.danweimingchengF31}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="款项性质" name="kuanxiangxingzhiF31" value="{$vo.kuanxiangxingzhiF31}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="金额" name="jineF31" value="{$vo.jineF31}"  class="input-large" id="name" placeholder=""></td>
+						
+					</tr>
+					<tr>
+						
+						
+						<td><input type="text" class="input-large" data-name="单位名称" name="danweimingchengF32" value="{$vo.danweimingchengF32}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="款项性质" name="kuanxiangxingzhiF32" value="{$vo.kuanxiangxingzhiF32}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="金额" name="jineF32" value="{$vo.jineF32}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						
+						
+						<td><input type="text" class="input-large" data-name="单位名称" name="danweimingchengF33" value="{$vo.danweimingchengF33}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="款项性质" name="kuanxiangxingzhiF33" value="{$vo.kuanxiangxingzhiF33}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="金额" name="jineF33" value="{$vo.jineF33}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>						
+						
+						<td><input type="text" class="input-large" data-name="单位名称" name="danweimingchengF34" value="{$vo.danweimingchengF34}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="款项性质" name="kuanxiangxingzhiF34" value="{$vo.kuanxiangxingzhiF34}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="金额" name="jineF34" value="{$vo.jineF34}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						
+						
+						<td><input type="text" class="input-large" data-name="单位名称" name="danweimingchengF35" value="{$vo.danweimingchengF35}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="款项性质" name="kuanxiangxingzhiF35" value="{$vo.kuanxiangxingzhiF35}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="金额" name="jineF35" value="{$vo.jineF35}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						<td rowspan="5">2014年度</td>
+						
+						<td><input type="text" class="input-large" data-name="单位名称" name="danweimingchengF41" value="{$vo.danweimingchengF41}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="款项性质" name="kuanxiangxingzhiF41" value="{$vo.kuanxiangxingzhiF41}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="金额" name="jineF41" value="{$vo.jineF41}"  class="input-large" id="name" placeholder=""></td>
+						
+					</tr>
+					<tr>
+						
+						
+						<td><input type="text" class="input-large" data-name="单位名称" name="danweimingchengF42" value="{$vo.danweimingchengF42}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="款项性质" name="kuanxiangxingzhiF42" value="{$vo.kuanxiangxingzhiF42}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="金额" name="jineF42" value="{$vo.jineF42}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						
+						
+						<td><input type="text" class="input-large" data-name="单位名称" name="danweimingchengF43" value="{$vo.danweimingchengF43}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="款项性质" name="kuanxiangxingzhiF43" value="{$vo.kuanxiangxingzhiF43}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="金额" name="jineF43" value="{$vo.jineF43}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>						
+						
+						<td><input type="text" class="input-large" data-name="单位名称" name="danweimingchengF44" value="{$vo.danweimingchengF44}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="款项性质" name="kuanxiangxingzhiF44" value="{$vo.kuanxiangxingzhiF44}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="金额" name="jineF44" value="{$vo.jineF44}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						
+						
+						<td><input type="text" class="input-large" data-name="单位名称" name="danweimingchengF45" value="{$vo.danweimingchengF45}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="款项性质" name="kuanxiangxingzhiF45" value="{$vo.kuanxiangxingzhiF45}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="金额" name="jineF45" value="{$vo.jineF45}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					
+					
+				</table>
+				
+
+
+
+				<if condition="($data.status eq 4) OR ($data.status eq 5) ">
+				<input type="button" class="btn btn-large btn-primary btn-block" onclick="onnext('0')" value=" 保 存 ">
+				 
+				<input type="button" class="btn btn-large btn-success btn-block" onclick="onnext('1')" value=" 提 交 并 且 下一步">
+				<input type="hidden" name="isnext" id="isnext" value="0">
+				<script>
+				function onnext(w)
+				{
+					$('#isnext').val(w);
+					gdCnt=0;
+					action="save";
+					if($("button[name=gdSave]").length>0)
+					{
+						$("button[name=gdSave]").each(function(){
+							$(this).click();
+						})
+					}else
+					{
+							recall();
+					}
+				}
+				function recall()
+				{
+					if(gdCnt==$("button[name=gdSave]").length)
+					{
+						if(action=="save")
+						{
+							if(check())
+							{
+								$('#frmall')[0].submit();
+							}
+						}else if(action!="0")
+						{
+							delinfo1(action)
+						}else
+						{
+							add1();
+						}
+					}
+				}
+				</script>
+					</if>
+					</form>
+					</fieldset>
+				</div>
+	</div>
+</div>
+</block>

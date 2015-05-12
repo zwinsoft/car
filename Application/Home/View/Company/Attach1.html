@@ -1,0 +1,195 @@
+<extend name="Base/common"/>
+
+<block name="HeaderScript">
+    <script>
+
+		function check()
+		{
+
+			var isgo=true;
+			$("input[type=text]").each(function(){
+				if($(this).val()=="" && isgo && $(this).attr("data-name") !=undefined)
+				{
+					alert($(this).attr("data-name")+" 不能为空");
+					$(this).focus();
+					isgo=false;
+					return;
+				}
+			});
+			if(!isgo)
+			{return false;}		
+
+
+			return isgo;
+}
+	</script>
+</block>
+
+<block name="body">
+<div class="row mainContent">
+	<include file="Public/left"/>
+	<div class="span7">
+		<div id="home" class="tab-pane fade active in">
+			<fieldset>
+				<form method="post" action="__SELF__" onsubmit="return check()" id="frmall"> 
+				<input type="hidden" name="id" value="{$Think.session.user_id}" readonly />
+				<legend>附表1、主要产品产量、销量和收入、成本、利润资料(单位：吨、万元)</legend>
+				<table class="table table-bordered table-condensed">
+					<tr>
+						<td rowspan="2" >产品名称</td>
+						<td rowspan="2" >项目</td>
+						<td colspan="3">实际数</td>						
+						<td colspan="2">预测数</td>						
+					</tr>
+					<tr>			
+						
+						<td>2012年</td>
+						<td>2013年</td>
+						<td>2014年</td>
+						<td>2014年</td>
+						<td>2015年</td>
+					</tr>
+					<tr>
+						<td rowspan="5"><input type="text" class="input-small" data-name="产品名称" name="chanpinmingcheng1" value="{$vo.chanpinmingcheng1}"  class="input-large" id="name" placeholder=""></td>
+						<td>产量</td>
+						<td><input type="text" class="input-small" data-name="产量" name="chanliang11" value="{$vo.chanliang11}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="产量" name="chanliang12" value="{$vo.chanliang12}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="产量" name="chanliang13" value="{$vo.chanliang13}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="产量" name="chanliang14" value="{$vo.chanliang14}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="产量" name="chanliang15" value="{$vo.chanliang15}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						
+						<td>销量</td>
+						<td><input type="text" class="input-small" data-name="销量" name="xiaoliang11" value="{$vo.xiaoliang11}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销量" name="xiaoliang12" value="{$vo.xiaoliang12}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销量" name="xiaoliang13" value="{$vo.xiaoliang13}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销量" name="xiaoliang14" value="{$vo.xiaoliang14}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销量" name="xiaoliang15" value="{$vo.xiaoliang15}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						
+						<td>销售收入</td>
+						<td><input type="text" class="input-small" data-name="销售收入" name="xiaoshoushouru11" value="{$vo.xiaoshoushouru11}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销售收入" name="xiaoshoushouru12" value="{$vo.xiaoshoushouru12}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销售收入" name="xiaoshoushouru13" value="{$vo.xiaoshoushouru13}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销售收入" name="xiaoshoushouru14" value="{$vo.xiaoshoushouru14}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销售收入" name="xiaoshoushouru15" value="{$vo.xiaoshoushouru15}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						
+						<td>生产成本</td>
+						<td><input type="text" class="input-small" data-name="生产成本" name="shengchanchengben11" value="{$vo.shengchanchengben11}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="生产成本" name="shengchanchengben12" value="{$vo.shengchanchengben12}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="生产成本" name="shengchanchengben13" value="{$vo.shengchanchengben13}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="生产成本" name="shengchanchengben14" value="{$vo.shengchanchengben14}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="生产成本" name="shengchanchengben15" value="{$vo.shengchanchengben15}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						
+						<td>利润率</td>
+						<td><input type="text" class="input-small" data-name="利润率" name="lirunlv11" value="{$vo.lirunlv11}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="利润率" name="lirunlv12" value="{$vo.lirunlv12}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="利润率" name="lirunlv13" value="{$vo.lirunlv13}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="利润率" name="lirunlv14" value="{$vo.lirunlv14}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="利润率" name="lirunlv15" value="{$vo.lirunlv15}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						<td rowspan="5"><input type="text" class="input-small" data-name="产品名称2" name="chanpinmingcheng2" value="{$vo.chanpinmingcheng2}"  class="input-large" id="name" placeholder=""></td>
+						<td>产量</td>
+						<td><input type="text" class="input-small" data-name="产量" name="chanliang21" value="{$vo.chanliang21}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="产量" name="chanliang22" value="{$vo.chanliang22}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="产量" name="chanliang23" value="{$vo.chanliang23}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="产量" name="chanliang24" value="{$vo.chanliang24}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="产量" name="chanliang25" value="{$vo.chanliang25}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						
+						<td>销量</td>
+						<td><input type="text" class="input-small" data-name="销量" name="xiaoliang21" value="{$vo.xiaoliang21}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销量" name="xiaoliang22" value="{$vo.xiaoliang22}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销量" name="xiaoliang23" value="{$vo.xiaoliang23}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销量" name="xiaoliang24" value="{$vo.xiaoliang24}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销量" name="xiaoliang25" value="{$vo.xiaoliang25}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						
+						<td>销售收入</td>
+						<td><input type="text" class="input-small" data-name="销售收入" name="xiaoshoushouru21" value="{$vo.xiaoshoushouru21}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销售收入" name="xiaoshoushouru22" value="{$vo.xiaoshoushouru22}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销售收入" name="xiaoshoushouru23" value="{$vo.xiaoshoushouru23}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销售收入" name="xiaoshoushouru24" value="{$vo.xiaoshoushouru24}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="销售收入" name="xiaoshoushouru25" value="{$vo.xiaoshoushouru25}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						
+						<td>生产成本</td>
+						<td><input type="text" class="input-small" data-name="生产成本" name="shengchanchengben21" value="{$vo.shengchanchengben21}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="生产成本" name="shengchanchengben22" value="{$vo.shengchanchengben22}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="生产成本" name="shengchanchengben23" value="{$vo.shengchanchengben23}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="生产成本" name="shengchanchengben24" value="{$vo.shengchanchengben24}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="生产成本" name="shengchanchengben25" value="{$vo.shengchanchengben25}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					<tr>
+						
+						<td>利润率</td>
+						<td><input type="text" class="input-small" data-name="利润率" name="lirunlv21" value="{$vo.lirunlv21}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="利润率" name="lirunlv22" value="{$vo.lirunlv22}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="利润率" name="lirunlv23" value="{$vo.lirunlv23}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="利润率" name="lirunlv24" value="{$vo.lirunlv24}"  class="input-large" id="name" placeholder=""></td>
+						<td><input type="text" class="input-small" data-name="利润率" name="lirunlv25" value="{$vo.lirunlv25}"  class="input-large" id="name" placeholder=""></td>
+					</tr>
+					
+					
+				</table>
+				
+
+
+				<if condition="($data.status eq 4) OR ($data.status eq 5) ">
+				<input type="button" class="btn btn-large btn-primary btn-block" onclick="onnext('0')" value=" 保 存 ">
+				 
+				<input type="button" class="btn btn-large btn-success btn-block" onclick="onnext('1')" value=" 提 交 并 且 下一步">
+				<input type="hidden" name="isnext" id="isnext" value="0">
+				<script>
+				function onnext(w)
+				{
+					$('#isnext').val(w);
+					gdCnt=0;
+					action="save";
+					if($("button[name=gdSave]").length>0)
+					{
+						$("button[name=gdSave]").each(function(){
+							$(this).click();
+						})
+					}else
+					{
+							recall();
+					}
+				}
+				function recall()
+				{
+					if(gdCnt==$("button[name=gdSave]").length)
+					{
+						if(action=="save")
+						{
+							if(check())
+							{
+								$('#frmall')[0].submit();
+							}
+						}else if(action!="0")
+						{
+							delinfo1(action)
+						}else
+						{
+							add1();
+						}
+					}
+				}
+				</script>
+					</if>
+					</form>
+					</fieldset>
+				</div>
+	</div>
+</div>
+</block>
